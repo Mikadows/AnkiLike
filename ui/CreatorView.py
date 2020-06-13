@@ -1,5 +1,6 @@
 # coding:utf-8
 import tkinter
+import tkinter.font as tkFont
 
 
 class CreatorView(tkinter.Frame):
@@ -10,7 +11,8 @@ class CreatorView(tkinter.Frame):
         self.create_view()
 
     def create_view(self):
-        self.title = tkinter.Label(text="AnkiLike - Creator Mode")
+        self.fontTitle = tkFont.Font(family="Lucida Grande", size=20)
+        self.title = tkinter.Label(text="AnkiLike - Creator Mode", font=self.fontTitle)
         self.title.pack()
 
     def clear(self):
