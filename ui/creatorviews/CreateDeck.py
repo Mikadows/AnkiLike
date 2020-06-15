@@ -52,7 +52,7 @@ class CreateDeck(tkinter.Frame):
             self.confirm_text.set("Error : name cannot be blank")
             return
 
-        new_deck = Deck(self.var_name_entry.get())
+        new_deck = Deck(self.var_name_entry.get(), "n")
         print(new_deck._get_name())
         self.load_back_view()
 
