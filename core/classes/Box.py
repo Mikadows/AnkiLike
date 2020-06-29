@@ -1,12 +1,17 @@
-
 class Box:
+
     def __init__(self, name, decks):
-        self.name = name
+        self._name = name
         self.decks = {}
         self.decks = decks
 
     def _get_name(self):
-        return self.name
+        return self._name
+
+    def _set_name(self, name):
+        self._name = name
+
+    name = property(_get_name, _set_name)
 
     def _get_decks(self):
         return self.decks
