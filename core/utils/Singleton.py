@@ -3,7 +3,7 @@ class Singleton:
     @staticmethod
     def getInstance():
         """ Static access method """
-        if Singleton._instance == Nonu:
+        if Singleton._instance == None:
             Singleton()
         return Singleton._instance
     def __init__(self):
