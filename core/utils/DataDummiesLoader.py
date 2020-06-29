@@ -6,7 +6,7 @@ from core.classes.Card import Card
 from core.classes.Deck import Deck
 
 
-class DataLoader:
+class DataDummiesLoader:
 
     def box_load(self):
         box = Box("test box", [])

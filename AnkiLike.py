@@ -1,6 +1,8 @@
 # coding:utf-8
 import tkinter
 
+from core.Data import Data
+from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
 from ui.PlayerView import PlayerView
 
@@ -41,6 +43,10 @@ class AnkiLike(tkinter.Frame):
         CreatorView(self.app)
 
 
-root = tkinter.Tk()
-app = AnkiLike(master=root)
-app.mainloop()
+if __name__ == "__main__":
+    root = tkinter.Tk()
+    app = AnkiLike(master=root)
+    data = Data()
+    data.box = DataDummiesLoader().box_load()
+    print(len(data.box.decks))
+    app.mainloop()
