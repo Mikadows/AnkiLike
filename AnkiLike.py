@@ -49,4 +49,7 @@ if __name__ == "__main__":
     data = Data()
     data.box = DataDummiesLoader().box_load()
     print(len(data.box.decks))
+    dataCheck = Data()
+
+    print(len(dataCheck.box.decks))
     app.mainloop()
