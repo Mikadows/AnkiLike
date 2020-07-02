@@ -20,7 +20,9 @@ class DataDummiesLoader:
         count_card = round(random.uniform(1, 10))
         for nb_card in range(count_card):
             new_deck.cards.append(self.deck_card(nb_card))
+        return new_deck
 
     def deck_card(self, nb_card):
         new_card = Card("title" + str(nb_card), "question" + str(nb_card), "answser" + str(nb_card))
         new_card.validation_level = round(random.uniform(0, 5))
+        return new_card
