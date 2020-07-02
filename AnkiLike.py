@@ -1,10 +1,11 @@
 # coding:utf-8
 import tkinter
+import sys
 
 from core.Data import Data
 from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
-from ui.PlayerView import PlayerView
+from ui.playerviews.PlayerView import PlayerView
 
 
 class AnkiLike(tkinter.Frame):
@@ -45,11 +46,11 @@ class AnkiLike(tkinter.Frame):
 
 if __name__ == "__main__":
     root = tkinter.Tk()
-    app = AnkiLike(master=root)
     data = Data()
-    data.box = DataDummiesLoader().box_load()
-    print(len(data.box.decks))
-    dataCheck = Data()
 
-    print(len(dataCheck.box.decks))
+    # load dummies random number of decks and cards
+    if sys.argv[1] == "dataload":
+        data.box = DataDummiesLoader().box_load()
+    app = AnkiLike(master=root)
+
     app.mainloop()
