@@ -1,6 +1,10 @@
 # coding:utf-8
 import tkinter
 import tkinter.font as tkFont
+from tkinter import END, ANCHOR
+
+from core.Data import Data
+from ui.playerviews.PlayerController import PlayerController
 
 
 class PlayerView(tkinter.Frame):
@@ -8,17 +12,29 @@ class PlayerView(tkinter.Frame):
         super().__init__(master)
         self.app = master
         self.clear()
-        self.player_controller = PlayerController()
+        self.data = Data()
+        self.player_controller = PlayerController(self.data)
+
+        self.str_line = "_" * 20
+        self.fontTitle = tkFont.Font(family="Lucida Grande", size=20)
+        self.line = tkinter.Label(text=self.str_line, font=self.fontTitle)
+        self.title = tkinter.Label(text="AnkiLike - Player Mode", font=self.fontTitle)
+
+        self.list_decks = tkinter.Listbox()
+
+        self.play_deck_button = tkinter.Button(text="Play deck", command=lambda: self.player_controller.play(self.list_decks.get(ANCHOR)))
+
         self.create_view()
 
     def create_view(self):
-        self.fontTitle = tkFont.Font(family="Lucida Grande", size=20)
-        self.title = tkinter.Label(text="AnkiLike - Player Mode", font=self.fontTitle)
         self.title.pack()
 
-        self.str_line = "_"*20
-        self.line = tkinter.Label(text=self.str_line, font=self.fontTitle)
         self.line.pack()
+
+        [self.list_decks.insert(END, deck.name) for deck in self.data.box.decks]
+        self.list_decks.pack()
+
+        self.play_deck_button.pack()
 
     def clear(self):
         for widget in self.app.winfo_children():
