@@ -3,6 +3,7 @@ import tkinter
 import sys
 
 from core.Data import Data
+from core.classes.Box import Box
 from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
 from ui.playerviews.PlayerView import PlayerView
@@ -49,8 +50,10 @@ if __name__ == "__main__":
     data = Data()
 
     # load dummies random number of decks and cards
-    if sys.argv[1] == "dataload":
+    if len(sys.argv) >= 2 and sys.argv[1] == "dataload":
         data.box = DataDummiesLoader().box_load()
+    else:
+        data.box = Box("AnkiLike", None)  # DEBT: have to retrieve data by file
     app = AnkiLike(master=root)
 
     app.mainloop()
