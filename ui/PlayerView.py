@@ -1,10 +1,11 @@
 # coding:utf-8
 import tkinter
 import tkinter.font as tkFont
-from tkinter import END, ANCHOR
+from tkinter import END
 
 from core.Data import Data
-from ui.playerviews.PlayerController import PlayerController
+from core.services.DeckService import DeckService
+from ui.PlayerController import PlayerController
 
 
 class PlayerView(tkinter.Frame):
@@ -13,7 +14,7 @@ class PlayerView(tkinter.Frame):
         self.app = master
         self.clear()
         self.data = Data()
-        self.player_controller = PlayerController(self.data)
+        self.player_controller = PlayerController(DeckService(self.data))
 
         self.str_line = "_" * 20
         self.fontTitle = tkFont.Font(family="Lucida Grande", size=20)
@@ -27,14 +28,15 @@ class PlayerView(tkinter.Frame):
         self.create_view()
 
     def _call_play_button(self):
-        self.player_controller.play(self.app, self.list_decks.index(self.list_decks.curselection()))
+        if self.list_decks.curselection() != ():
+            current_deck_index = self.list_decks.index(self.list_decks.curselection())
+            self.player_controller.play(self.app, current_deck_index)
 
     def create_view(self):
         self.title.pack()
-
         self.line.pack()
-
-        [self.list_decks.insert(END, deck.name) for deck in self.data.box.decks]
+        if self.data.box.decks is not None:
+            [self.list_decks.insert(END, deck.name) for deck in self.data.box.decks]
         self.list_decks.pack()
 
         self.play_deck_button.pack()

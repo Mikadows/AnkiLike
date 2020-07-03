@@ -1,5 +1,4 @@
 from core.Data import Data
-from core.utils.Singleton import Singleton
 
 
 class DeckService:
@@ -7,5 +6,8 @@ class DeckService:
     def __init__(self, data: Data):
         self.data = data
 
-    def get_deck(self, index: int):
-        return self.data.box.decks
+    def find_deck_by_index(self, index: int):
+        try:
+            return self.data.box.decks[index]
+        except IndexError:
+            return None
