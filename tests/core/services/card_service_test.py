@@ -20,27 +20,27 @@ class CardServiceTest(unittest.TestCase):
         self.card_service = CardService(self.data)
 
     def test_get_card_randomly_should_return_card(self):
-        self.assertIsInstance(self.card_service.get_card_randomly(0), Card,
-                              "incorrect card instance")
+        self.assertIsInstance(self.card_service.get_card_index_randomly(0), int,
+                              "incorrect type")
 
     @mock.patch('random.uniform')
     def test_get_card_randomly_should_retrieve_appropriate_random_value(self, random_uniform_mock):
         current_cards_len = len(self.cards)
-        self.card_service.get_card_randomly(0)
+        self.card_service.get_card_index_randomly(0)
         random_uniform_mock.assert_called_with(0, current_cards_len - 1)
 
         self.data.box.decks[0].cards.append(Card("new card", "question", "answer", 0))
 
         self.card_service.data = self.data
 
-        self.card_service.get_card_randomly(0)
+        self.card_service.get_card_index_randomly(0)
         random_uniform_mock.assert_called_with(0, current_cards_len)
 
     @mock.patch('random.uniform')
     def test_get_card_randomly_should_return_appropriate_card(self, random_uniform_mock):
         random_uniform_mock.return_value = 2
 
-        result = self.card_service.get_card_randomly(0)
+        result = self.card_service.get_card_index_randomly(0)
 
-        self.assertEqual(result, self.cards[2])
+        self.assertEqual(result, 2)
 

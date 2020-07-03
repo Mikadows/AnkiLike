@@ -16,8 +16,7 @@ class CardService:
 
     data = property(_get_data, _set_data)
 
-    def get_card_randomly(self, deck_index):
+    def get_card_index_randomly(self, deck_index):
         # TODO : Get card depend to all cards validation_level
         cards = self._data.box.decks[deck_index].cards
-        random_value = random.uniform(0, len(cards) - 1)
-        return cards[round(random_value)]
+        return round(random.uniform(0, len(cards) - 1))
