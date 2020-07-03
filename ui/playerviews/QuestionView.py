@@ -5,10 +5,10 @@ from core.classes import Deck
 
 
 class QuestionView(tkinter.Frame):
-    def __init__(self, deck: Deck, master=None):
+    def __init__(self, deck: Deck, deck_index, master=None):
         self.app = master
         self.clear()
-
+        self.deck_index = deck_index
         self.cards = deck.cards
 
         self.str_line = "_" * 20
@@ -19,7 +19,6 @@ class QuestionView(tkinter.Frame):
         self.deck_name = tkinter.Label(text="Deck name : " + deck.name, font=self.font_title)
         self.deck_name.config(font=("Lucida Grande", 15))
         self.question_title = tkinter.Label(text="Question :", font=("Lucida Grande", 15))
-
 
         self._create_player_deck_view()
 

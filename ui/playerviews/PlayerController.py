@@ -9,4 +9,4 @@ class PlayerController:
         self.deck_service = deck_service
 
     def play(self, master=None, index: int = -1):
-        QuestionView(self.deck_service.find_deck_by_index(index), master)
+        QuestionView(self.deck_service.find_deck_by_index(index), index, master)
