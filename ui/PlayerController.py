@@ -4,8 +4,7 @@ from ui.playerviews.QuestionView import QuestionView
 
 
 class PlayerController:
-    def __init__(self, data: Data, deck_service: DeckService):
-        self.data = data
+    def __init__(self, deck_service: DeckService):
         self.deck_service = deck_service
 
     def play(self, master=None, index: int = -1):

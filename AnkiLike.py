@@ -6,7 +6,7 @@ from core.Data import Data
 from core.classes.Box import Box
 from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
-from ui.playerviews.PlayerView import PlayerView
+from ui.PlayerView import PlayerView
 
 
 class AnkiLike(tkinter.Frame):
