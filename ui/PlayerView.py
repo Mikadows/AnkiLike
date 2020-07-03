@@ -28,8 +28,9 @@ class PlayerView(tkinter.Frame):
         self.create_view()
 
     def _call_play_button(self):
-        current_deck_index = self.list_decks.index(self.list_decks.curselection())
-        self.player_controller.play(self.app, self.list_decks.index(self.list_decks.curselection()))
+        if self.list_decks.curselection() != ():
+            current_deck_index = self.list_decks.index(self.list_decks.curselection())
+            self.player_controller.play(self.app, current_deck_index)
 
     def create_view(self):
         self.title.pack()
