@@ -8,4 +8,4 @@ class PlayerController:
 
     def play(self, master=None, index: int = -1):
         from ui.playerviews.QuestionView import QuestionView
-        QuestionView(self.deck_service.find_deck_by_index(index), index, master)
+        QuestionView(index, master)
