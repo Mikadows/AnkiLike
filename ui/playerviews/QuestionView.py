@@ -4,7 +4,7 @@ import tkinter.font as tkFont
 from core.classes import Deck
 
 
-class PlayerDeckView(tkinter.Frame):
+class QuestionView(tkinter.Frame):
     def __init__(self, deck: Deck, master=None):
         self.app = master
         self.clear()
@@ -18,6 +18,8 @@ class PlayerDeckView(tkinter.Frame):
 
         self.deck_name = tkinter.Label(text="Deck name : " + deck.name, font=self.font_title)
         self.deck_name.config(font=("Lucida Grande", 15))
+        self.question_title = tkinter.Label(text="Question :", font=("Lucida Grande", 15))
+
 
         self._create_player_deck_view()
 
@@ -25,6 +27,7 @@ class PlayerDeckView(tkinter.Frame):
         self.title.pack()
         self.deck_name.pack()
         self.line.pack()
+        self.question_title.pack()
 
     def clear(self):
         for widget in self.app.winfo_children():
