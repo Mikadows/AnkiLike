@@ -8,4 +8,4 @@ class DeckService:
         self.data = data
 
     def get_deck(self, index: int):
-        return self.box.decks
+        return self.data.box.decks
