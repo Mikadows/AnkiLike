@@ -10,3 +10,4 @@ class Data(Singleton):
         self._box = box
 
     box = property(_get_box, _set_box)
+
