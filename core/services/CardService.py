@@ -20,3 +20,13 @@ class CardService:
         # TODO : Get card depend to all cards validation_level
         cards = self._data.box.decks[deck_index].cards
         return round(random.uniform(0, len(cards) - 1))
+
+    def update_validation_level(self, deck_index: int, card_index: int, is_validate: bool):
+        current_box = self.data.box
+        current_card = current_box.decks[deck_index].cards[card_index]
+        if not is_validate:
+            current_card.validation_level = 0
+        elif current_card.validation_level < 5:
+            current_card.validation_level += 1
+        current_box.decks[deck_index].cards[card_index] = current_card
+        self.data.box = current_box
