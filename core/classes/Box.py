@@ -2,7 +2,7 @@ class Box:
 
     def __init__(self, name, decks):
         self._name = name
-        self.decks = {}
+        self.decks = []
         self.decks = decks
 
     def _get_name(self):
@@ -17,7 +17,10 @@ class Box:
         return self.decks
 
     def add_deck(self, deck):
-        self.decks[deck._get_name()] = deck
+        self.decks.append(deck)
 
     def delete_deck(self, deck):
-        self.decks.pop(deck._get_name())
+        try:
+            self.decks.remove(deck)
+        except ValueError:
+            print("deck {0} is not in the decks list".format(deck.name))
