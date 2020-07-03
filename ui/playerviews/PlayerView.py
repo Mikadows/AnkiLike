@@ -22,9 +22,12 @@ class PlayerView(tkinter.Frame):
 
         self.list_decks = tkinter.Listbox()
 
-        self.play_deck_button = tkinter.Button(text="Play deck", command=lambda: self.player_controller.play(self.list_decks.get(ANCHOR)))
+        self.play_deck_button = tkinter.Button(text="Play deck", command=self._call_play_button)
 
         self.create_view()
+
+    def _call_play_button(self):
+        self.player_controller.play(self.app, self.list_decks.index(self.list_decks.curselection()))
 
     def create_view(self):
         self.title.pack()
