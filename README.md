@@ -3,4 +3,4 @@
 Python project
 
 command to launch tests :
->python -m unittest discover tests "*_test.py"
+>python -m unittest discover -p "*_test.py"
