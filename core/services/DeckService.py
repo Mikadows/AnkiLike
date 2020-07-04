@@ -1,4 +1,5 @@
 from core.Data import Data
+from core.classes import Deck
 
 
 class DeckService:
@@ -11,3 +12,6 @@ class DeckService:
             return self.data.box.decks[index]
         except IndexError:
             return None
+
+    def add_deck(self, deck):
+        self.data.box.add_deck(deck)

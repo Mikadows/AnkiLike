@@ -3,6 +3,7 @@ import tkinter
 import tkinter.font as tkFont
 import tkinter.ttk as ttk
 
+from core.Data import Data
 from core.classes.Deck import Deck
 from ui.CreatorView import CreatorView
 
@@ -12,6 +13,7 @@ class ManageDeck(tkinter.Frame):
         super().__init__(master)
         self.app = master
         self.clear()
+        self.data = Data()
         self.create_view()
 
     def create_view(self):
@@ -19,10 +21,9 @@ class ManageDeck(tkinter.Frame):
         self.title = tkinter.Label(text="AnkiLike - Creator Mode", font=self.fontTitle)
         self.title.pack()
 
-        self.str_line = "_"*20
+        self.str_line = "_" * 20
         self.line = tkinter.Label(text=self.str_line, font=self.fontTitle)
         self.line.pack()
-
 
         self.frame_menu = tkinter.LabelFrame(self.app, text="Deck Management")
         self.frame_menu.pack(pady=20)
@@ -34,6 +35,7 @@ class ManageDeck(tkinter.Frame):
         self.label_choose.pack(side="left", pady=15, padx=30)
 
         self.tst = ttk.Combobox(self.form_one)
+        self.tst['values'] = [d._get_name() for d in self.data.box.decks]
         self.tst.pack(pady=15, padx=5)
 
         self.save_btn = tkinter.Button(self.frame_menu, text="Manage", command=self.manage)
@@ -41,7 +43,6 @@ class ManageDeck(tkinter.Frame):
 
         self.back_btn = tkinter.Button(self.frame_menu, text="Back", command=self.load_back_view)
         self.back_btn.pack(padx=100, pady=25)
-
 
     def manage(self):
         return
