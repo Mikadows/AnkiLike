@@ -37,3 +37,7 @@ class DeckService:
     def delete_deck(self, deck):
         self.data.box.decks.remove(deck)
         return
+
+    def delete_card_in_deck(self, deck, card):
+        pos = self.find_deck_index(deck)
+        self.data.box.decks[pos].del_card(card)

@@ -1,4 +1,3 @@
-
 class Deck:
     def __init__(self, name, cards):
         self._name = name
@@ -17,3 +16,6 @@ class Deck:
 
     def add_card(self, card):
         self.cards.append(card)
+
+    def del_card(self, card):
+        self.cards.remove(card)

@@ -4,6 +4,7 @@ import tkinter.font as tkFont
 from core.Data import Data
 from core.services.DeckService import DeckService
 from ui.creatorviews.CreateCard import CreateCard
+from ui.creatorviews.DeleteCard import DeleteCard
 
 
 class CardManagement(tkinter.Frame):
@@ -22,14 +23,20 @@ class CardManagement(tkinter.Frame):
         self.line = tkinter.Label(text=self.str_line, font=self.fontTitle)
         self.frame_menu = tkinter.LabelFrame(self.app, text="Deck management")
         self.create_card = tkinter.Button(self.frame_menu, text="Add card", command=self.load_add_card_view)
-        self.update_card = tkinter.Button(self.frame_menu, text="Update card", command=None)
-        self.delete_card = tkinter.Button(self.frame_menu, text="Delete card", command=None)
+        self.update_card = tkinter.Button(self.frame_menu, text="Update card", command=self.load_update_card_view)
+        self.delete_card = tkinter.Button(self.frame_menu, text="Delete card", command=self.load_del_card_view)
         self.back_btn = tkinter.Button(self.frame_menu, text="Back", command=self.load_back_view)
 
         self.create_view()
 
     def load_add_card_view(self):
         CreateCard(self.selectedDeck, master=self.app)
+
+    def load_update_card_view(self):
+        return
+
+    def load_del_card_view(self):
+        DeleteCard(self.selectedDeck, master=self.app)
 
     def create_view(self):
         self.title.pack()
