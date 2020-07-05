@@ -41,3 +41,13 @@ class DeckService:
     def delete_card_in_deck(self, deck, card):
         pos = self.find_deck_index(deck)
         self.data.box.decks[pos].del_card(card)
+
+    def update_card_in_deck(self, deck, card, old_card):
+        pos = self.find_deck_index(deck)
+        for c in self.data.box.decks[pos].cards:
+            if c.title == old_card.title:
+                cpos = self.data.box.decks[pos].cards.index(old_card)
+                self.data.box.decks[pos].cards[cpos].title = card.title
+                self.data.box.decks[pos].cards[cpos].question = card.question
+                self.data.box.decks[pos].cards[cpos].answer = card.answer
+                return

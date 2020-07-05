@@ -5,6 +5,7 @@ from core.Data import Data
 from core.services.DeckService import DeckService
 from ui.creatorviews.CreateCard import CreateCard
 from ui.creatorviews.DeleteCard import DeleteCard
+from ui.creatorviews.UpdateCardSelector import UpdateCardSelector
 
 
 class CardManagement(tkinter.Frame):
@@ -33,7 +34,7 @@ class CardManagement(tkinter.Frame):
         CreateCard(self.selectedDeck, master=self.app)
 
     def load_update_card_view(self):
-        return
+        UpdateCardSelector(self.selectedDeck, master=self.app)
 
     def load_del_card_view(self):
         DeleteCard(self.selectedDeck, master=self.app)
