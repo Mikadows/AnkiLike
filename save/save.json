@@ -1,0 +1,38 @@
+{
+  "decks": [
+    {
+      "name": "Premier deck",
+      "cards": [
+        {
+          "title": "Première carte",
+          "question": "ESGI surcôtée de ouf ?",
+          "answer": "OUI",
+          "validation_level": "c quoi deja validation_level ?"
+        },
+        {
+          "title": "Deuxième carte",
+          "question": "ESGI surcôtée de ouf ?",
+          "answer": "OUI",
+          "validation_level": "c quoi deja validation_level ?"
+        }
+      ]
+    },
+    {
+      "name": "Deuxième deck",
+      "cards": [
+        {
+          "title": "Première carte",
+          "question": "ESGI surcôtée de ouf ?",
+          "answer": "OUI",
+          "validation_level": "c quoi deja validation_level ?"
+        },
+        {
+          "title": "Deuxième carte",
+          "question": "ESGI surcôtée de ouf ?",
+          "answer": "OUI",
+          "validation_level": "c quoi deja validation_level ?"
+        }
+      ]
+    }
+  ]
+}

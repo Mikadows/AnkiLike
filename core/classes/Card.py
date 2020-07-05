@@ -5,6 +5,9 @@ class Card:
         self._answer = answer
         self.validation_level = validation_level
 
+    def __str__(self):
+        return "\n        title : " + str(self.title) + "\n        question : " + str(self.question) + "\n        answer : " + str(self.answer) + "\n        validation_level : " + str(self.validation_level)
+
     def _get_title(self):
         return self._title
 

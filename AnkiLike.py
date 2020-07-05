@@ -3,7 +3,7 @@ import tkinter
 import sys
 
 from core.Data import Data
-from core.classes.Box import Box
+from core.services.SaveService import SaveService
 from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
 from ui.PlayerView import PlayerView
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "dataload":
         data.box = DataDummiesLoader().box_load()
     else:
-        data.box = Box("AnkiLike", None)  # DEBT: have to retrieve data by file
+        data.box = SaveService().get_saved_box()
     app = AnkiLike(master=root)
 
     app.mainloop()

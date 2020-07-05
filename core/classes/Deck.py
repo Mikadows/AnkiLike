@@ -17,5 +17,11 @@ class Deck:
     def add_card(self, card):
         self.cards.append(card)
 
+    def __str__(self):
+        cards = ""
+        for card in self.cards:
+            cards += str(card) + "\n"
+        return "\n    name : " + str(self.name) + "\n    cards : " + str(cards)
+
     def del_card(self, card):
         self.cards.remove(card)
