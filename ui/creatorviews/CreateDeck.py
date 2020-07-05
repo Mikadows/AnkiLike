@@ -7,6 +7,7 @@ from core.Data import Data
 from core.classes.Deck import Deck
 from core.services.DeckService import DeckService
 from ui.CreatorView import CreatorView
+from ui.creatorviews.CreateCard import CreateCard
 
 
 class CreateDeck(tkinter.Frame):
@@ -50,9 +51,10 @@ class CreateDeck(tkinter.Frame):
             self.confirm_text.set("Error : name cannot be blank")
             return
 
-        deck = Deck(self.var_name_entry.get(), None)
+        deck = Deck(self.var_name_entry.get(), [])
         self.deckService.add_deck(deck)
-        self.load_back_view()
+        CreateCard(deck, master=self.app)
+        # self.load_back_view()
 
     def load_back_view(self):
         CreatorView(self.app)
