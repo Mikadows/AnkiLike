@@ -24,3 +24,9 @@ class Box:
             self.decks.remove(deck)
         except ValueError:
             print("deck {0} is not in the decks list".format(deck.name))
+
+    def __str__(self):
+        decks = ""
+        for deck in self.decks:
+            decks += str(deck) + "\n"
+        return "name : " + str(self.name) + "\ndecks : " + str(decks)
