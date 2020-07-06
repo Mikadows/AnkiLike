@@ -30,7 +30,7 @@ class AnkiLike(tkinter.Frame):
         self.a_menu.add_command(label="Import deck", command=self.import_decks)
         self.a_menu.add_command(label="Export deck", command=self.export_box)
         self.a_menu.add_separator()
-        self.a_menu.add_command(label="Quit", command=self.app.quit)
+        self.a_menu.add_command(label="Quit", command=on_closing)
 
         self.m_modes = tkinter.Menu(self.mainmenu, tearoff=0)
         self.m_modes.add_command(label="Player Mode", command=self.load_player_view)
