@@ -53,16 +53,23 @@ class CardServiceTest(unittest.TestCase):
         self.assertGreater(self.data.box.decks[0].cards[0].validation_level, current_validation_level)
         self.assertEqual(self.data.box.decks[0].cards[0].validation_level, current_validation_level + 1)
 
-    def test_update_validation_level_should_put_to_0_when_card_is_not_validate(self):
+    def test_update_validation_level_should_put_to_minus1_when_card_is_not_validate(self):
         self.data.box.decks[0].cards[0].validation_level = 4
 
         self.card_service.update_validation_level(0, 0, False)
 
-        self.assertEqual(self.data.box.decks[0].cards[0].validation_level, 0)
+        self.assertEqual(self.data.box.decks[0].cards[0].validation_level, -1)
 
     def test_update_validation_level_should_not_update_when_validation_level_is_highest(self):
-        self.data.box.decks[0].cards[0].validation_level = 5
+        self.data.box.decks[0].cards[0].validation_level = 4
 
         self.card_service.update_validation_level(0, 0, True)
 
-        self.assertEqual(self.data.box.decks[0].cards[0].validation_level, 5)
+        self.assertEqual(self.data.box.decks[0].cards[0].validation_level, 4)
+
+    def test_update_validation_level_should_update_to_1_when_validation_level_is_minus1(self):
+        self.data.box.decks[0].cards[0].validation_level = -1
+
+        self.card_service.update_validation_level(0, 0, True)
+
+        self.assertEqual(self.data.box.decks[0].cards[0].validation_level, 1)
