@@ -1,8 +1,7 @@
-class Box:
+class Box():
 
     def __init__(self, name, decks):
         self._name = name
-        self.decks = []
         self.decks = decks
 
     def _get_name(self):
