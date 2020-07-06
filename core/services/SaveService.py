@@ -28,7 +28,7 @@ class SaveService:
                     box.add_deck(new_deck)
                 return box
             except:
-                messagebox.showwarning("Sauvegarde", "Vos données de sauvegarde sont corrompues ou inexistantes")
+                messagebox.showwarning("Sauvegarde", "Vos données sont corrompues ou inexistantes")
                 return box
         else:
             messagebox.showwarning("Sauvegarde", "Aucune sauvegarde trouvée")

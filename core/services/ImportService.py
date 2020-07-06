@@ -15,6 +15,10 @@ class ImportService:
         file_path = filedialog.askopenfilename(title="Veuillez choisir un fichier JSON à importer",
                                                filetypes=[("JSON files", "*.json")])
         box = SaveService().get_json_box(Path(file_path))
-        for deck in box.decks:
-            self.data.box.add_deck(deck)
-        messagebox.showinfo("Import", "Vos données ont été importées")
+        if len(box.decks) < 1:
+            messagebox.showwarning("Import", "Vos données n'ont pas pu être importées")
+            return
+        else:
+            for deck in box.decks:
+                self.data.box.add_deck(deck)
+            messagebox.showinfo("Import", "Vos données ont été importées")
