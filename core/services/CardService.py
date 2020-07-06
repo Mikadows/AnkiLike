@@ -25,8 +25,10 @@ class CardService:
         current_box = self.data.box
         current_card = current_box.decks[deck_index].cards[card_index]
         if not is_validate:
-            current_card.validation_level = 0
-        elif current_card.validation_level < 5:
+            current_card.validation_level = -1
+        elif current_card.validation_level == -1:
+            current_card.validation_level = 1
+        elif current_card.validation_level < 4:
             current_card.validation_level += 1
         current_box.decks[deck_index].cards[card_index] = current_card
         self.data.box = current_box
