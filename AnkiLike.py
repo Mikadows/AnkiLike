@@ -1,8 +1,10 @@
 # coding:utf-8
 import tkinter
 import sys
+from pathlib import Path
 
 from core.Data import Data
+from core.services.ImportService import ImportService
 from core.services.SaveService import SaveService
 from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
@@ -23,7 +25,7 @@ class AnkiLike(tkinter.Frame):
         self.mainmenu = tkinter.Menu(self.app)
 
         self.a_menu = tkinter.Menu(self.mainmenu, tearoff=0)
-        self.a_menu.add_command(label="Import deck")
+        self.a_menu.add_command(label="Import deck", command=self.import_deck)
         self.a_menu.add_command(label="Export deck")
         self.a_menu.add_separator()
         self.a_menu.add_command(label="Quit", command=self.app.quit)
@@ -44,6 +46,9 @@ class AnkiLike(tkinter.Frame):
     def load_creator_view(self):
         CreatorView(self.app)
 
+    def import_deck(self):
+        ImportService().import_decks()
+
 
 if __name__ == "__main__":
     root = tkinter.Tk()
@@ -53,7 +58,7 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2 and sys.argv[1] == "dataload":
         data.box = DataDummiesLoader().box_load()
     else:
-        data.box = SaveService().get_saved_box()
+        data.box = SaveService().get_json_box(Path("save/save.json"))
     app = AnkiLike(master=root)
 
     app.mainloop()

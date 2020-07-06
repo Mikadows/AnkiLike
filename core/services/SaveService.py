@@ -1,39 +1,51 @@
 # coding:utf-8
 import json
-import os.path
 
+from pathlib import Path
 from core.classes.Box import Box
 from core.classes.Card import Card
 from core.classes.Deck import Deck
+from core.utils.BoxEncoder import BoxEncoder
 
 
 class SaveService:
 
-    def get_saved_box(self):
-        if os.path.isfile('save/save.json'):
-            with open("save/save.json", encoding='utf-8') as file:
-                decks = self.get_saved_decks(file)
-                if decks is None or len(decks) < 1:
-                    print('No saved decks found.')
-                    return
-                else:
-                    return Box("AnkiLike", decks)
+    def __init__(self):
+        self.save_file_path = Path("save/save.json")
+
+    def get_json_box(self, file_path):
+        box = Box("AnkiLike", list())
+        if file_path.exists():
+            try:
+                json_data = self.get_json_from_file(file_path)
+                for deck in json_data['decks']:
+                    new_deck = Deck(deck['name'], list())
+                    for card in deck['cards']:
+                        new_card = Card(card['title'], card['question'], card['answer'], card['validation_level'])
+                        new_deck.add_card(new_card)
+                    box.add_deck(new_deck)
+                return box
+            except:
+                print('Error parsing saved data')
+                return box
         else:
             print('No back-up found.')
-            return
+            return box
 
-    def get_saved_decks(self, json_file):
-        decks = list()
+    def get_json_from_file(self, file_path):
+        with open(file_path, 'r', encoding='utf-8') as json_file:
+            data = json.load(json_file)
+        return data
+
+    def save_json_to_file(self, file_path, data):
         try:
-            data = json.loads(json_file.read())
-            saved_decks = data['decks']
-            for deck in saved_decks:
-                new_deck = Deck(deck['name'], [])
-                for card in deck['cards']:
-                    new_card = Card(card['title'], card['question'], card['answer'], card['validation_level'])
-                    new_deck.add_card(new_card)
-                decks.append(new_deck)
-            return decks
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return True
         except:
-            print('Wrong parsing, you are going to loose all your data :).')
-            return
+            print('Can\'t save data')
+            return False
+
+    def save_data(self, data):
+        with open(self.save_file_path, 'w') as file:
+            json.dump(data.box, file, cls=BoxEncoder)
