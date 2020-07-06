@@ -2,6 +2,8 @@
 import json
 
 from pathlib import Path
+from tkinter import messagebox
+
 from core.classes.Box import Box
 from core.classes.Card import Card
 from core.classes.Deck import Deck
@@ -26,26 +28,23 @@ class SaveService:
                     box.add_deck(new_deck)
                 return box
             except:
-                print('Error parsing saved data')
+                messagebox.showwarning("Sauvegarde", "Vos données de sauvegarde sont corrompues ou inexistantes")
                 return box
         else:
-            print('No back-up found.')
+            messagebox.showwarning("Sauvegarde", "Aucune sauvegarde trouvée")
             return box
 
     def get_json_from_file(self, file_path):
         with open(file_path, 'r', encoding='utf-8') as json_file:
             data = json.load(json_file)
-        return data
+            return data
 
-    def save_json_to_file(self, file_path, data):
+    def save_data(self, file_path, data):
         try:
             with open(file_path, 'w') as file:
-                json.dump(data, file)
-            return True
+                json.dump(data.box, file, cls=BoxEncoder)
+                messagebox.showinfo("Sauvegarde", "Vos données ont été sauvegardées")
         except:
-            print('Can\'t save data')
-            return False
+            messagebox.showerror("Sauvegarde", "Les données n'ont pas pu être sauvegardées")
 
-    def save_data(self, data):
-        with open(self.save_file_path, 'w') as file:
-            json.dump(data.box, file, cls=BoxEncoder)
+

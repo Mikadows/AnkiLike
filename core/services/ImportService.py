@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from core.Data import Data
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 
 from core.services.SaveService import SaveService
 
@@ -17,5 +17,4 @@ class ImportService:
         box = SaveService().get_json_box(Path(file_path))
         for deck in box.decks:
             self.data.box.add_deck(deck)
-
-        SaveService().save_data(self.data)
+        messagebox.showinfo("Import", "Vos données ont été importées")

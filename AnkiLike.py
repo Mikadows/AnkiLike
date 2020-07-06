@@ -2,8 +2,10 @@
 import tkinter
 import sys
 from pathlib import Path
+from tkinter import messagebox
 
 from core.Data import Data
+from core.services.ExportService import ExportService
 from core.services.ImportService import ImportService
 from core.services.SaveService import SaveService
 from core.utils.DataDummiesLoader import DataDummiesLoader
@@ -25,8 +27,8 @@ class AnkiLike(tkinter.Frame):
         self.mainmenu = tkinter.Menu(self.app)
 
         self.a_menu = tkinter.Menu(self.mainmenu, tearoff=0)
-        self.a_menu.add_command(label="Import deck", command=self.import_deck)
-        self.a_menu.add_command(label="Export deck")
+        self.a_menu.add_command(label="Import deck", command=self.import_decks)
+        self.a_menu.add_command(label="Export deck", command=self.export_box)
         self.a_menu.add_separator()
         self.a_menu.add_command(label="Quit", command=self.app.quit)
 
@@ -46,12 +48,31 @@ class AnkiLike(tkinter.Frame):
     def load_creator_view(self):
         CreatorView(self.app)
 
-    def import_deck(self):
+    def import_decks(self):
         ImportService().import_decks()
 
+    def export_box(self):
+        ExportService().export_box()
+
+def on_closing():
+    confirm = messagebox.askyesnocancel("Quitter", "Sauvegarder avant de quitter ?", icon='warning')
+
+    if confirm:
+        Path('save').mkdir(parents=True, exist_ok=True)
+        SaveService().save_data('save/save.json', data)
+        root.destroy()
+    elif confirm is None:
+        pass
+    else:
+        root.destroy()
+
+def on_saving(event):
+    Path('save').mkdir(parents=True, exist_ok=True)
+    SaveService().save_data('save/save.json', data)
 
 if __name__ == "__main__":
     root = tkinter.Tk()
+
     data = Data()
 
     # load dummies random number of decks and cards
@@ -61,4 +82,7 @@ if __name__ == "__main__":
         data.box = SaveService().get_json_box(Path("save/save.json"))
     app = AnkiLike(master=root)
 
+    root.bind('<Control-s>', on_saving)
+    root.protocol("WM_DELETE_WINDOW", on_closing)
     app.mainloop()
+
