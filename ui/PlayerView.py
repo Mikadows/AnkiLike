@@ -24,13 +24,18 @@ class PlayerView(tkinter.Frame):
         self.list_decks = tkinter.Listbox()
 
         self.play_deck_button = tkinter.Button(text="Play deck", command=self._call_play_button)
+        self.error_deck_no_card_label = tkinter.Label(text="The deck has no card", font=("Lucida Grande", 15), fg="red")
 
         self.create_view()
 
     def _call_play_button(self):
         if self.list_decks.curselection() != ():
             current_deck_index = self.list_decks.index(self.list_decks.curselection())
-            self.player_controller.play(self.app, current_deck_index)
+            if self.data.box.decks[current_deck_index].cards:
+                self.player_controller.play(self.app, current_deck_index)
+            else:
+                self.error_deck_no_card_label.config(text="The deck '{}' has no card".format(self.data.box.decks[current_deck_index].name))
+                self.error_deck_no_card_label.pack()
 
     def create_view(self):
         self.title.pack()
