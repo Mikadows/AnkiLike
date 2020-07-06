@@ -2,7 +2,6 @@ import tkinter
 import tkinter.font as tkFont
 
 from core.Data import Data
-from core.classes import Deck
 from core.services.CardService import CardService
 from ui.PlayerView import PlayerView
 from ui.playerviews.QuestionController import QuestionController
@@ -29,6 +28,7 @@ class QuestionView(tkinter.Frame):
         self.question_title = tkinter.Label(text="Question :", font=("Lucida Grande", 15))
         self.current_card = self.question_controller.draw_card()
         self.current_content = tkinter.Label(text=self.current_card.question, font=("Lucida Grande", 20))
+        self.current_validation_level = tkinter.Label(text="Validation level : {}".format(self.current_card.validation_level))
         self.button_validate = tkinter.Button(text="Show answer", command=self._call_show_answer)
         self.button_not_validate = tkinter.Button(text="Not Validate", command=self._call_not_validate)
         self.back_button = tkinter.Button(text="Return list decks", command=self._back_player_view)
@@ -40,6 +40,7 @@ class QuestionView(tkinter.Frame):
         self.deck_name.pack()
         self.question_title.pack()
         self.current_content.pack()
+        self.current_validation_level.pack()
         self.button_validate.pack()
         self.back_button.pack()
 
