@@ -39,10 +39,10 @@ class SaveService:
             data = json.load(json_file)
             return data
 
-    def save_data(self, file_path, data):
+    def save_data(self, file_path, box):
         try:
             with open(file_path, 'w') as file:
-                json.dump(data.box, file, cls=BoxEncoder)
+                json.dump(box, file, cls=BoxEncoder)
                 messagebox.showinfo("Sauvegarde", "Vos données ont été sauvegardées")
         except:
             messagebox.showerror("Sauvegarde", "Les données n'ont pas pu être sauvegardées")

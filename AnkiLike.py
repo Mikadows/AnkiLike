@@ -10,6 +10,7 @@ from core.services.ImportService import ImportService
 from core.services.SaveService import SaveService
 from core.utils.DataDummiesLoader import DataDummiesLoader
 from ui.CreatorView import CreatorView
+from ui.ExportView import ExportView
 from ui.PlayerView import PlayerView
 
 
@@ -52,14 +53,15 @@ class AnkiLike(tkinter.Frame):
         ImportService().import_decks()
 
     def export_box(self):
-        ExportService().export_box()
+        #ExportService().export_box()
+        ExportView(self.app)
 
 def on_closing():
     confirm = messagebox.askyesnocancel("Quitter", "Sauvegarder avant de quitter ?", icon='warning')
 
     if confirm:
         Path('save').mkdir(parents=True, exist_ok=True)
-        SaveService().save_data('save/save.json', data)
+        SaveService().save_data('save/save.json', data.box)
         root.destroy()
     elif confirm is None:
         pass
@@ -68,7 +70,7 @@ def on_closing():
 
 def on_saving(event):
     Path('save').mkdir(parents=True, exist_ok=True)
-    SaveService().save_data('save/save.json', data)
+    SaveService().save_data('save/save.json', data.box)
 
 if __name__ == "__main__":
     root = tkinter.Tk()
