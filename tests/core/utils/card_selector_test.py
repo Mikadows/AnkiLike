@@ -31,9 +31,18 @@ class CardSelectorTest(unittest.TestCase):
         result = self.__cardSelector.get_list_validations()
         self.assertTrue(all(map(lambda number: number == 0, result)))
 
-        # self.__current_deck = self.create_list_cards([0, 0, 3])
-        # result = self.__cardSelector.get_list_validations()
-        # self.assertTrue(all(map(lambda number: number == 1, result)))
+        self.__cardSelector.deck = self.create_deck_with_define_cards_validation_level([0, 0, 3])
+        result = self.__cardSelector.get_list_validations()
+        self.assertTrue(all(map(lambda number: number == 1, result)))
+
+    def test_get_list_validations_should_return_50_cards_when_ratio_half_and_2_different_validation_level(self):
+        self.__cardSelector.deck = self.create_deck_with_define_cards_validation_level([2, 4])
+        self.__cardSelector.ratio = 1/2
+
+        result = self.__cardSelector.get_list_validations()
+
+        self.assertEqual(len([number for number in result if number == -1]), 50)
+        self.assertEqual(len([number for number in result if number == 0]), 50)
 
     def create_deck_with_define_cards_validation_level(self, levels) -> Deck:
         list_cards = []
