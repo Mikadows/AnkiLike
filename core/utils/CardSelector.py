@@ -26,10 +26,13 @@ class CardSelector:
     def get_list_validations(self):
         result = []
         available_cases = 100
-        validation_levels = self.__get_validation_level_list_of_cards()
-
+        validation_levels = self.__get_validation_levels_present_in_cards()
         for i in range(len(validation_levels)):
             cases_to_take = round(available_cases * self.__ratio)
+            if available_cases - cases_to_take <= 1:
+                if cases_to_take > 1:
+                    cases_to_take -= 1
+
             result += [validation_levels[i]] * cases_to_take
             available_cases -= cases_to_take
             if i == len(validation_levels) - 1:
@@ -37,7 +40,7 @@ class CardSelector:
 
         return result
 
-    def __get_validation_level_list_of_cards(self):
+    def __get_validation_levels_present_in_cards(self):
         result = []
         vl_list = [card.validation_level for card in self.__deck.cards]
 
