@@ -24,22 +24,26 @@ class ValuesRatioLister:
 
     ratio = property(__get_ratio, __set_ratio)
 
-    def get_random_list(self):
+    def get_random_list(self, int_values, available_cases=100):
         """
         this function return integer list that contains that
         allocates values according to the ratio
         """
         result = []
-        available_cases = self.__list_len
-        for i in range(len(self.__values)):
-            cases_to_take = round(available_cases * self.__ratio)
-            if available_cases - cases_to_take <= 1:
-                if cases_to_take > 1:
-                    cases_to_take -= 1
 
-            result += [self.__values[i]] * cases_to_take
-            available_cases -= cases_to_take
-            if i == len(self.__values) - 1:
-                result += [self.__values[i]] * available_cases
+        if not int_values:
+            return None
+        if len(int_values) == 1:
+            return [int_values[0]] * available_cases
+
+        cases_to_take = round(available_cases * self.__ratio)
+        if available_cases - cases_to_take <= 1:
+            if cases_to_take > 1:
+                cases_to_take -= 1
+        result += [int_values[0]] * cases_to_take
+
+        if len(int_values) > 1:
+            int_values.pop(0)
+            result += self.get_random_list(int_values, available_cases - cases_to_take)
 
         return result
