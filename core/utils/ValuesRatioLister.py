@@ -1,7 +1,7 @@
 from core.classes.Deck import Deck
 
 
-class RandomLister:
+class ValuesRatioLister:
 
     def __init__(self, values, ratio: float, list_len=100):
         self.__values = values
@@ -31,7 +31,6 @@ class RandomLister:
         """
         result = []
         available_cases = self.__list_len
-        # validation_levels = self.__get_validation_levels_present_in_cards()
         for i in range(len(self.__values)):
             cases_to_take = round(available_cases * self.__ratio)
             if available_cases - cases_to_take <= 1:
@@ -44,11 +43,3 @@ class RandomLister:
                 result += [self.__values[i]] * available_cases
 
         return result
-
-    # def __get_validation_levels_present_in_cards(self):
-    #     result = []
-    #     vl_list = [card.validation_level for card in self.__values.cards]
-    #
-    #     [result.append(vl) for vl in vl_list if vl not in result]
-    #
-    #     return result

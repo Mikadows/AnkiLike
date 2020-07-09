@@ -1,12 +1,12 @@
 import unittest
 
-from core.utils.RandomLister import RandomLister
+from core.utils.ValuesRatioLister import ValuesRatioLister
 
 
-class RandomListerTest(unittest.TestCase):
+class ValuesRatioListerTest(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.__cardSelector = RandomLister([-1], 1 / 2)
+        self.__cardSelector = ValuesRatioLister([-1], 1 / 2)
 
     def test_get_list_validations_should_return_list_length_100(self):
 
