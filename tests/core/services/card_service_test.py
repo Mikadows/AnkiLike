@@ -58,39 +58,6 @@ class CardServiceTest(unittest.TestCase):
 
     def test_get_card_randomly_should_return_card(self):
         self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
+        self.card_service.current_card = None
         self.assertIsInstance(self.card_service.get_card_randomly(), Card,
                               "incorrect type")
-
-    # @mock.patch('random.uniform')
-    # def test_get_card_randomly_should_retrieve_appropriate_random_value_depend_to_ratio_list(self, random_uniform_mock):
-    #     self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
-    #     random_uniform_mock.return_value = 2
-    #
-    #     self.card_service.get_card_randomly()
-    #     random_uniform_mock.assert_called_with(0, 99)
-    #
-    # @mock.patch('random.uniform')
-    # @mock.patch('random.choice')
-    # def test_get_card_randomly_should_retrieve_appropriate_random_value_depend_to_ratio_list(self, random_uniform_mock):
-    #     self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
-    #     random_uniform_mock.return_value = 2
-    #
-    #     self.card_service.get_card_randomly()
-    #     random_uniform_mock.assert_called_with(0, 99)
-    #
-    # @mock.patch('random.uniform')
-    # @mock.patch('random.choice')
-    # def test_get_card_randomly_should_return_card_with_validation_zero_when_one_card_in_deck(self, uniform_mock, choice_mock):
-    #     self.mock_values_ratio_lister.get_values_ratio_list.side_effect = [[0] * 100, 0]
-    #     self.data.box.decks[0] = self.deck_create_helper.create_deck_with_define_cards_validation_level([0, 2])
-    #     self.cards = self.data.box.decks[0].cards
-    #
-    #     uniform_mock.return_value = 2
-    #     choice_mock.return_value = 1
-    #
-    #     self.card_service.get_card_randomly()
-    #
-    #     choice_mock.assert_called_with(0, 99)
-
-    # @mock.patch('random.uniform')
-    # def test_get_card_randomly_should_return_card_
