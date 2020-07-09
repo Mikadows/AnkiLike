@@ -9,7 +9,7 @@ class QuestionController:
         self.deck_index = deck_index
         self.card_service = card_service
         self.card_service.data = Data()
-        self.card_service.values_ratio_lister = ValuesRatioLister(2/3)
+        self.card_service.values_ratio_lister = ValuesRatioLister(3/4)
         self.card_service.deck_index = deck_index
         self.card_service.current_card = last_card
 
