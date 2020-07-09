@@ -29,10 +29,11 @@ class QuestionView(tkinter.Frame):
         self.title = tkinter.Label(text="AnkiLike - Player Mode", font=self.font_title)
 
         self.deck_name = tkinter.Label(text="Deck name : " + self.current_deck.name, font=self.font_title)
-        self.deck_name.config(font=("Lucida Grande", 15))
+        self.deck_name.config(font=("Lucida Grande", 20))
         self.current_card = self.question_controller.draw_card()
-        self.question_title = tkinter.Label(text="Question : {}".format(self.current_card.title), font=("Lucida Grande", 15))
-        self.current_content = tkinter.Label(text=self.current_card.question, font=("Lucida Grande", 20))
+        self.question_title = tkinter.Label(text="Title : {}".format(self.current_card.title), font=("Lucida Grande", 20))
+        self.question_label = tkinter.Label(text="Question :", font=("Lucida Grande", 13))
+        self.current_content = tkinter.Label(text=self.current_card.question, font=("Lucida Grande", 13))
         self.current_validation_level = tkinter.Label(
             text="Validation level : {}".format(self.current_card.validation_level))
         self.button_validate = tkinter.Button(text="Show answer", command=self._call_show_answer)
@@ -45,6 +46,7 @@ class QuestionView(tkinter.Frame):
         self.line.pack()
         self.deck_name.pack()
         self.question_title.pack()
+        self.question_label.pack()
         self.current_content.pack()
         self.current_validation_level.pack()
         self.button_validate.pack()
@@ -56,7 +58,7 @@ class QuestionView(tkinter.Frame):
     def _call_show_answer(self):
         self.back_button.pack_forget()
 
-        self.question_title.configure(text="Answer :")
+        self.question_label.configure(text="Answer :")
         self.current_content.configure(text=self.current_card.answer)
         self.button_validate.configure(text="Validate", command=self._call_validate)
 
