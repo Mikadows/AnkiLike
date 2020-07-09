@@ -23,7 +23,7 @@ class ValuesRatioLister:
 
         if not int_values:
             return None
-        if len(int_values) == 1:
+        if len(int_values) == 1 or self.__ratio == 1:
             return [int_values[0]] * available_cases
 
         cases_to_take = round(available_cases * self.__ratio)
