@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
 
-import mock as mock
-
 from core.Data import Data
 from core.classes.Box import Box
 from core.classes.Card import Card
@@ -59,22 +57,40 @@ class CardServiceTest(unittest.TestCase):
         self.assertEqual(self.data.box.decks[0].cards[0].validation_level, 1)
 
     def test_get_card_randomly_should_return_card(self):
-        self.assertIsInstance(self.card_service.get_card_index_randomly(), Card,
+        self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
+        self.assertIsInstance(self.card_service.get_card_randomly(), Card,
                               "incorrect type")
 
-    @mock.patch('random.uniform')
-    def test_get_card_randomly_should_retrieve_appropriate_random_value_depend_to_ratio_list(self, random_uniform_mock):
-        self.card_service.data = self.data
-        self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
-        random_uniform_mock.return_value = 2
+    # @mock.patch('random.uniform')
+    # def test_get_card_randomly_should_retrieve_appropriate_random_value_depend_to_ratio_list(self, random_uniform_mock):
+    #     self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
+    #     random_uniform_mock.return_value = 2
+    #
+    #     self.card_service.get_card_randomly()
+    #     random_uniform_mock.assert_called_with(0, 99)
+    #
+    # @mock.patch('random.uniform')
+    # @mock.patch('random.choice')
+    # def test_get_card_randomly_should_retrieve_appropriate_random_value_depend_to_ratio_list(self, random_uniform_mock):
+    #     self.mock_values_ratio_lister.get_values_ratio_list.return_value = [0] * 100
+    #     random_uniform_mock.return_value = 2
+    #
+    #     self.card_service.get_card_randomly()
+    #     random_uniform_mock.assert_called_with(0, 99)
+    #
+    # @mock.patch('random.uniform')
+    # @mock.patch('random.choice')
+    # def test_get_card_randomly_should_return_card_with_validation_zero_when_one_card_in_deck(self, uniform_mock, choice_mock):
+    #     self.mock_values_ratio_lister.get_values_ratio_list.side_effect = [[0] * 100, 0]
+    #     self.data.box.decks[0] = self.deck_create_helper.create_deck_with_define_cards_validation_level([0, 2])
+    #     self.cards = self.data.box.decks[0].cards
+    #
+    #     uniform_mock.return_value = 2
+    #     choice_mock.return_value = 1
+    #
+    #     self.card_service.get_card_randomly()
+    #
+    #     choice_mock.assert_called_with(0, 99)
 
-        self.card_service.get_card_index_randomly()
-        random_uniform_mock.assert_called_with(0, 99)
-
-    @mock.patch('random.uniform')
-    def test_get_card_randomly_should_return_appropriate_card(self, random_uniform_mock):
-        random_uniform_mock.return_value = 2
-
-        result = self.card_service.get_card_index_randomly()
-
-        self.assertEqual(result, 2)
+    # @mock.patch('random.uniform')
+    # def test_get_card_randomly_should_return_card_

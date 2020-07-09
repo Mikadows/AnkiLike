@@ -43,18 +43,28 @@ class CardService(Singleton):
         current_box.decks[deck_index].cards[card_index] = current_card
         self.data.box = current_box
 
-    def get_card_index_randomly(self):
-        # TODO : Get card depend to all cards validation_level
-        vl_present_list = self.__get_validation_levels_present_in_cards()
-        vl_ratio_list = self.__values_ratio_lister.get_values_ratio_list(vl_present_list)
-        vl_select = vl_ratio_list[round(random.uniform(0, len(vl_ratio_list) - 1))]
+    def get_card_randomly(self):
         cards = self.__data.box.decks[self.deck_index].cards
-        return cards[0]
+
+        # get list of presence validation levels in cards
+        vl_present_list = self.__get_validation_levels_present_in_cards()
+
+        # get validation level list allocate thanks to ratio
+        vl_ratio_list = self.__values_ratio_lister.get_values_ratio_list(vl_present_list)
+
+        # select randomly validation_level in list of validation_level ratio list
+        vl_select = vl_ratio_list[round(random.uniform(0, len(vl_ratio_list) - 1))]
+
+        # get list of cards that have level select randomly
+        index_cards_vl_list = [i for i, card in enumerate(cards) if card.validation_level == vl_select]
+
+        return cards[random.choice(index_cards_vl_list)]
 
     def __get_validation_levels_present_in_cards(self):
         result = []
         vl_list = [card.validation_level for card in self.__data.box.decks[self.deck_index].cards]
 
         [result.append(vl) for vl in vl_list if vl not in result]
+        result.sort()
 
         return result
