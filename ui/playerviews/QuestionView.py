@@ -3,12 +3,14 @@ import tkinter.font as tkFont
 
 from core.Data import Data
 from core.services.CardService import CardService
+from core.utils.ValuesRatioLister import ValuesRatioLister
 from ui.PlayerView import PlayerView
 from ui.playerviews.QuestionController import QuestionController
 
 
 class QuestionView(tkinter.Frame):
-    def __init__(self, deck_index, master=None):
+    def __init__(self, deck_index, master=None, **kw):
+        super().__init__(master, **kw)
         self.app = master
         self.clear()
         self.data = Data()
@@ -16,7 +18,13 @@ class QuestionView(tkinter.Frame):
         self.deck_index = deck_index
         self.cards = self.current_deck.cards
 
-        self.question_controller = QuestionController(deck_index, CardService(self.data))
+        # set card_service
+        self.card_service = CardService()
+        self.card_service.data = Data()
+        self.card_service.values_ratio_lister = ValuesRatioLister(2/3)
+        self.card_service.deck_index = deck_index
+
+        self.question_controller = QuestionController(deck_index, self.card_service)
 
         self.str_line = "_" * 20
         self.font_title = tkFont.Font(family="Lucida Grande", size=20)
