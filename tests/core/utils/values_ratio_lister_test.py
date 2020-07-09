@@ -25,6 +25,13 @@ class ValuesRatioListerTest(unittest.TestCase):
 
         self.assertTrue(all(map(lambda number: number == -1, result)))
 
+    def test_get_list_validations_should_return_list_same_number_when_cards_only_minus_one_validation_level(self):
+        self.__cardSelector.ratio = 1
+        
+        result = self.__cardSelector.get_values_ratio_list([-1, 0])
+
+        self.assertEqual(len([vl for vl in result if vl == -1]), 100)
+
     def test_get_list_validations_should_return_list_same_number_when_cards_only_have_same_validation_level(self):
         self.__cardSelector.values = [0]
         result = self.__cardSelector.get_values_ratio_list([0])
