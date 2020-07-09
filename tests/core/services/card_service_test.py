@@ -1,4 +1,6 @@
 import unittest
+from unittest.mock import MagicMock
+
 import mock as mock
 
 from core.Data import Data
@@ -16,12 +18,9 @@ class CardServiceTest(unittest.TestCase):
         self.deck = Deck("deck name to test card service", self.cards)
         self.data = Data()
         self.data.box = Box("box name", [self.deck])
+        self.mock_values_ratio_lister = MagicMock()
 
-        self.card_service = CardService(self.data)
-
-    def test_get_card_randomly_should_return_card(self):
-        self.assertIsInstance(self.card_service.get_card_index_randomly(0), int,
-                              "incorrect type")
+        self.card_service = CardService(self.data, self.mock_values_ratio_lister)
 
     def test_update_validation_level_should_update_card_validation_level(self):
         current_validation_level = self.data.box.decks[0].cards[0].validation_level
@@ -52,6 +51,10 @@ class CardServiceTest(unittest.TestCase):
         self.card_service.update_validation_level(0, 0, True)
 
         self.assertEqual(self.data.box.decks[0].cards[0].validation_level, 1)
+
+    def test_get_card_randomly_should_return_card(self):
+        self.assertIsInstance(self.card_service.get_card_index_randomly(0), int,
+                              "incorrect type")
 
     @mock.patch('random.uniform')
     def test_get_card_randomly_should_retrieve_appropriate_random_value(self, random_uniform_mock):
