@@ -9,7 +9,7 @@ from ui.playerviews.QuestionController import QuestionController
 
 
 class QuestionView(tkinter.Frame):
-    def __init__(self, deck_index, master=None, **kw):
+    def __init__(self, deck_index, master=None, last_card=None, **kw):
         super().__init__(master, **kw)
         self.app = master
         self.clear()
@@ -20,11 +20,8 @@ class QuestionView(tkinter.Frame):
 
         # set card_service
         self.card_service = CardService()
-        self.card_service.data = Data()
-        self.card_service.values_ratio_lister = ValuesRatioLister(2/3)
-        self.card_service.deck_index = deck_index
 
-        self.question_controller = QuestionController(deck_index, self.card_service)
+        self.question_controller = QuestionController(deck_index, self.card_service, last_card)
 
         self.str_line = "_" * 20
         self.font_title = tkFont.Font(family="Lucida Grande", size=20)
@@ -33,10 +30,11 @@ class QuestionView(tkinter.Frame):
 
         self.deck_name = tkinter.Label(text="Deck name : " + self.current_deck.name, font=self.font_title)
         self.deck_name.config(font=("Lucida Grande", 15))
-        self.question_title = tkinter.Label(text="Question :", font=("Lucida Grande", 15))
         self.current_card = self.question_controller.draw_card()
+        self.question_title = tkinter.Label(text="Question : {}".format(self.current_card.title), font=("Lucida Grande", 15))
         self.current_content = tkinter.Label(text=self.current_card.question, font=("Lucida Grande", 20))
-        self.current_validation_level = tkinter.Label(text="Validation level : {}".format(self.current_card.validation_level))
+        self.current_validation_level = tkinter.Label(
+            text="Validation level : {}".format(self.current_card.validation_level))
         self.button_validate = tkinter.Button(text="Show answer", command=self._call_show_answer)
         self.button_not_validate = tkinter.Button(text="Not Validate", command=self._call_not_validate)
         self.back_button = tkinter.Button(text="Return list decks", command=self._back_player_view)
