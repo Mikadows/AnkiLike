@@ -1,3 +1,4 @@
+import operator
 import random
 
 from core.Data import Data
@@ -52,9 +53,6 @@ class CardService(Singleton):
         self.data.box = current_box
 
     def get_card_randomly(self):
-        if self.__current_card:
-            print(self.__current_card)
-
         cards = self.__data.box.decks[self.deck_index].cards
 
         # get list of presence validation levels in cards
@@ -69,7 +67,7 @@ class CardService(Singleton):
         # get list of cards that have level select randomly
         index_cards_vl_list = [i for i, card in enumerate(cards) if card.validation_level == vl_select]
 
-        return cards[random.choice(index_cards_vl_list)]
+        return self.__get_card_depend_to_last_current_card(cards[random.choice(index_cards_vl_list)], )
 
     def __get_validation_levels_present_in_cards(self):
         result = []
@@ -79,3 +77,14 @@ class CardService(Singleton):
         result.sort()
 
         return result
+
+    def __get_card_depend_to_last_current_card(self, checked_card):
+        cards = self.__data.box.decks[self.deck_index].cards
+        if checked_card != self.current_card or len(cards) <= 1:
+            return checked_card
+
+        cards = [card for card in cards if card != checked_card]
+
+        cards.sort(key=operator.attrgetter('validation_level'))
+
+        return cards[0]
