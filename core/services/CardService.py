@@ -31,19 +31,30 @@ class CardService(Singleton):
 
     deck_index = property(__get_deck_index, __set_deck_index)
 
+    def __get_current_card(self):
+        return self.__current_card
+
+    def __set_current_card(self, current_card):
+        self.__current_card = current_card
+
+    current_card = property(__get_current_card, __set_current_card)
+
     def update_validation_level(self, deck_index: int, card_index: int, is_validate: bool):
         current_box = self.data.box
-        current_card = current_box.decks[deck_index].cards[card_index]
+        self.current_card = current_box.decks[deck_index].cards[card_index]
         if not is_validate:
-            current_card.validation_level = -1
-        elif current_card.validation_level == -1:
-            current_card.validation_level = 1
-        elif current_card.validation_level < 4:
-            current_card.validation_level += 1
-        current_box.decks[deck_index].cards[card_index] = current_card
+            self.current_card.validation_level = -1
+        elif self.current_card.validation_level == -1:
+            self.current_card.validation_level = 1
+        elif self.current_card.validation_level < 4:
+            self.current_card.validation_level += 1
+        current_box.decks[deck_index].cards[card_index] = self.current_card
         self.data.box = current_box
 
     def get_card_randomly(self):
+        if self.__current_card:
+            print(self.__current_card)
+
         cards = self.__data.box.decks[self.deck_index].cards
 
         # get list of presence validation levels in cards
