@@ -9,3 +9,7 @@ class PlayerController:
     def play(self, master=None, index: int = -1):
         from ui.playerviews.QuestionView import QuestionView
         QuestionView(index, master)
+
+    def stats(self, master=None, index: int = -1):
+        from ui.playerviews.StatsView import StatsView
+        StatsView(index, master)

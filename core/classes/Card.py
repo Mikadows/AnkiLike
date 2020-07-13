@@ -3,7 +3,7 @@ class Card():
         self._title = title
         self._question = question
         self._answer = answer
-        self.validation_level = validation_level
+        self._validation_level = validation_level
 
     def __str__(self):
         return "\n        title : " + str(self.title) + "\n        question : " + str(self.question) + "\n        answer : " + str(self.answer) + "\n        validation_level : " + str(self.validation_level)
@@ -31,3 +31,11 @@ class Card():
         self._answer = answer
 
     answer = property(_get_answer, _set_answer)
+
+    def _get_validation_level(self):
+        return self._validation_level
+
+    def _set_validation_level(self, validation_level):
+        self._validation_level = validation_level
+
+    validation_level = property(_get_validation_level, _set_validation_level)
