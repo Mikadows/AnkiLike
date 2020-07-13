@@ -36,8 +36,8 @@ class StatsView(tkinter.Frame):
         self.tmp = "{:.1f}".format(self.global_validation_percent)
         self.varLabel = tkinter.StringVar()
         self.varLabel.set("Global validation : " + self.tmp + " %")
-        print(len(self.current_deck.cards), len([c for c in self.current_deck.cards if c.validation_level == 4]))
-        print(self.global_validation_percent)
+        # print(len(self.current_deck.cards), len([c for c in self.current_deck.cards if c.validation_level == 4]))
+        # print(self.global_validation_percent)
         self.percent_valid_label = tkinter.Label(textvariable=self.varLabel, font=("Lucida Grande", 12), fg='green')
 
         self.form_one = tkinter.Frame()
@@ -83,7 +83,7 @@ class StatsView(tkinter.Frame):
     def _refresh_card_list(self):
         self.selected_validation_level = int(self.validations_levels.get())
         self.cards_selected = [c for c in self.current_deck.cards if c.validation_level == self.selected_validation_level]
-        print(self.cards_selected)
+        # print(self.cards_selected)
         self.list_cards.delete(0, tkinter.END)
         [self.list_cards.insert(END, c.title) for c in self.cards_selected]
         self.list_cards.pack()
