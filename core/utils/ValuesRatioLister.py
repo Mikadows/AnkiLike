@@ -14,26 +14,26 @@ class ValuesRatioLister:
 
     ratio = property(__get_ratio, __set_ratio)
 
-    def get_values_ratio_list(self, int_values, available_cases=100):
+    def get_values_ratio_list(self, values, available_cases=100):
         """
         this function return integer list that contains that
         allocates values according to the ratio
         """
         result = []
 
-        if not int_values:
+        if not values:
             return None
-        if len(int_values) == 1 or self.__ratio == 1:
-            return [int_values[0]] * available_cases
+        if len(values) == 1 or self.__ratio == 1:
+            return [values[0]] * available_cases
 
         cases_to_take = round(available_cases * self.__ratio)
         if available_cases - cases_to_take <= 1:
             if cases_to_take > 1:
                 cases_to_take -= 1
-        result += [int_values[0]] * cases_to_take
+        result += [values[0]] * cases_to_take
 
-        if len(int_values) > 1:
-            int_values.pop(0)
-            result += self.get_values_ratio_list(int_values, available_cases - cases_to_take)
+        if len(values) > 1:
+            values.pop(0)
+            result += self.get_values_ratio_list(values, available_cases - cases_to_take)
 
         return result
