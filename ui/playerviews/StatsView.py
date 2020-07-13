@@ -81,6 +81,8 @@ class StatsView(tkinter.Frame):
             self.varLabel.set("Mastered cards : " + self.tmp + " %")
 
     def _refresh_card_list(self):
+        if self.validations_levels.get() == '':
+            return 
         self.selected_validation_level = int(self.validations_levels.get())
         self.cards_selected = [c for c in self.current_deck.cards if c.validation_level == self.selected_validation_level]
         # print(self.cards_selected)
