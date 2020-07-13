@@ -23,7 +23,7 @@ class SaveService:
                 for deck in json_data['decks']:
                     new_deck = Deck(deck['_name'], list())
                     for card in deck['cards']:
-                        new_card = Card(card['_title'], card['_question'], card['_answer'], card['validation_level'])
+                        new_card = Card(card['_title'], card['_question'], card['_answer'], card['_validation_level'])
                         new_deck.add_card(new_card)
                     box.add_deck(new_deck)
                 return box

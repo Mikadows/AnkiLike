@@ -1,5 +1,5 @@
 class Card():
-    def __init__(self, title, question, answer, validation_level=1):
+    def __init__(self, title, question, answer, validation_level=0):
         self._title = title
         self._question = question
         self._answer = answer
