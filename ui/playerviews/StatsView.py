@@ -35,7 +35,7 @@ class StatsView(tkinter.Frame):
         self.global_validation_percent = len([c for c in self.current_deck.cards if c.validation_level == 4])/len(self.current_deck.cards)*100
         self.tmp = "{:.1f}".format(self.global_validation_percent)
         self.varLabel = tkinter.StringVar()
-        self.varLabel.set("Global validation : " + self.tmp + " %")
+        self.varLabel.set("Mastered cards : " + self.tmp + " %")
         # print(len(self.current_deck.cards), len([c for c in self.current_deck.cards if c.validation_level == 4]))
         # print(self.global_validation_percent)
         self.percent_valid_label = tkinter.Label(textvariable=self.varLabel, font=("Lucida Grande", 12), fg='green')
@@ -43,7 +43,7 @@ class StatsView(tkinter.Frame):
         self.form_one = tkinter.Frame()
         self.label_choose = tkinter.Label(self.form_one, text="Validations levels : ")
         self.validations_levels = ttk.Combobox(self.form_one)
-        self.validations_levels['values'] = [n for n in range(1, 5)]
+        self.validations_levels['values'] = [n for n in range(-1, 5) if n != 0]
         self.show_button = tkinter.Button(self.form_one, text="Show cards", command=self._refresh_card_list)
         self.list_cards = tkinter.Listbox()
         self.varCard = tkinter.StringVar()
@@ -78,7 +78,7 @@ class StatsView(tkinter.Frame):
             self._refresh_card_list()
             self.global_validation_percent = len([c for c in self.current_deck.cards if c.validation_level == 4]) / len(self.current_deck.cards) * 100
             self.tmp = "{:.1f}".format(self.global_validation_percent)
-            self.varLabel.set("Global validation : " + self.tmp + " %")
+            self.varLabel.set("Mastered cards : " + self.tmp + " %")
 
     def _refresh_card_list(self):
         self.selected_validation_level = int(self.validations_levels.get())
@@ -89,7 +89,7 @@ class StatsView(tkinter.Frame):
         self.list_cards.pack()
         self.local_validation_percent = len([c for c in self.current_deck.cards if c.validation_level == self.selected_validation_level]) / len(self.current_deck.cards) * 100
         self.tmp2 = "{:.1f}".format(self.local_validation_percent)
-        self.varCard.set("Validate : " + self.tmp2 + " %")
+        self.varCard.set("Represent : " + self.tmp2 + " %")
 
     def clear(self):
         for widget in self.app.winfo_children():
