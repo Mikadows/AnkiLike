@@ -23,7 +23,7 @@ class SaveService:
                 for deck in json_data['decks']:
                     new_deck = Deck(deck['_name'], list())
                     for card in deck['cards']:
-                        new_card = Card(card['_title'], card['_question'], card['_answer'], card['validation_level'])
+                        new_card = Card(card['_title'], card['_question'], card['_answer'], card['_validation_level'])
                         new_deck.add_card(new_card)
                     box.add_deck(new_deck)
                 return box
@@ -39,10 +39,10 @@ class SaveService:
             data = json.load(json_file)
             return data
 
-    def save_data(self, file_path, data):
+    def save_data(self, file_path, box):
         try:
             with open(file_path, 'w') as file:
-                json.dump(data.box, file, cls=BoxEncoder)
+                json.dump(box, file, cls=BoxEncoder)
                 messagebox.showinfo("Sauvegarde", "Vos données ont été sauvegardées")
         except:
             messagebox.showerror("Sauvegarde", "Les données n'ont pas pu être sauvegardées")
